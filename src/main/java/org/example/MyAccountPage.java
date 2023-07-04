@@ -23,7 +23,7 @@ public class MyAccountPage extends BasePage {
     public void clickLostPasswordBtn(){
         lostPasswbutton.click();
     }
-    public boolean bedCredentialsAlertMessage(){
+    public boolean badCredentialsAlertMessage(){
         return badCredentialsAlert.isDisplayed();
     }
     public void typeUserNameIntoUsernameField(String userName){

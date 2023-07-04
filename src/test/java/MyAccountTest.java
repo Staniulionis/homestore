@@ -21,7 +21,7 @@ public class MyAccountTest extends BaseTest {
         myAccountPage.typePasswordIntoPasswrodField("test58 3.!$% as");
         myAccountPage.clickLoginBtn();
 
-        Assertions.assertTrue(myAccountPage.bedCredentialsAlertMessage());
+        Assertions.assertTrue(myAccountPage.badCredentialsAlertMessage());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class MyAccountTest extends BaseTest {
         myAccountPage.typePasswordIntoPasswrodField("test58 3.!$% as");
         myAccountPage.clickLoginBtn();
 
-        Assertions.assertTrue(myAccountPage.bedCredentialsAlertMessage());
+        Assertions.assertTrue(myAccountPage.badCredentialsAlertMessage());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class MyAccountTest extends BaseTest {
         myAccountPage.typePasswordIntoPasswrodField("test58 3.!$% as");
         myAccountPage.clickLoginBtn();
 
-        Assertions.assertTrue(myAccountPage.bedCredentialsAlertMessage());
+        Assertions.assertTrue(myAccountPage.badCredentialsAlertMessage());
     }
 
     @Test
@@ -69,6 +69,6 @@ public class MyAccountTest extends BaseTest {
         myAccountPage.typePasswordIntoPasswrodField("");
         myAccountPage.clickLoginBtn();
 
-        Assertions.assertTrue(myAccountPage.bedCredentialsAlertMessage());
+        Assertions.assertTrue(myAccountPage.badCredentialsAlertMessage());
     }
 }
