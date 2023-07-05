@@ -28,16 +28,18 @@ public class MyAccountTest extends BaseTest {
                 "unsure of your username, try your email address instead.", myAccountPage.unknownUsernameErrorAlert());
     }
 
-    @Test
     @DisplayName("Login failure with bad email")
-    void userCanNotLoginInLoginPageWithBadEmail() {
+    @ParameterizedTest
+    @CsvSource({"testas@mail.com", "t3sta5@mail.com", "!!.te+-stas@mail.com"})
+
+    void userCanNotLoginInLoginPageWithBadEmail(String email) {
 
         homePage = new HomePage(driver);
         myAccountPage = new MyAccountPage(driver);
 
         homePage.clickMyAccountBtn();
 
-        myAccountPage.typeUserNameIntoUsernameField("testas@mail.com");
+        myAccountPage.typeUserNameIntoUsernameField(email);
         myAccountPage.typePasswordIntoPasswrodField("test58 3.!$% as");
         myAccountPage.clickLoginBtn();
 
