@@ -11,7 +11,7 @@ public class LostPasswordPage extends BasePage {
     @FindBy(css = "[value=\"Reset password\"]")
     private WebElement resetButton;
     @FindBy(css = ".woocommerce-error")
-    private WebElement invalidUnOrEmailAlert;
+    private WebElement lostPasswErrorAlert;
     public LostPasswordPage(WebDriver driver) {
         super(driver);
     }
@@ -22,6 +22,12 @@ public class LostPasswordPage extends BasePage {
         resetButton.click();
     }
     public boolean badUsernameOrEMailAlert(){
-        return invalidUnOrEmailAlert.isDisplayed();
+        return lostPasswErrorAlert.isDisplayed();
+    }
+    public String getEmptyFieldErrorAlertText(){
+        return lostPasswErrorAlert.getText();
+    }
+    public String getInvalidUsernameOrEmailErrorAlertText(){
+        return lostPasswErrorAlert.getText();
     }
 }

@@ -25,7 +25,7 @@ public class LostPasswordTest extends BaseTest {
         lostPasswordPage.entersInvalidUsernameOrEmailInLostPasswordPage("testas");
         lostPasswordPage.clickResetPasswordBtn();
 
-        Assertions.assertTrue(lostPasswordPage.badUsernameOrEMailAlert());
+        Assertions.assertEquals("Invalid username or email.", lostPasswordPage.getInvalidUsernameOrEmailErrorAlertText());
     }
 
     @Test
@@ -43,6 +43,6 @@ public class LostPasswordTest extends BaseTest {
         lostPasswordPage.entersInvalidUsernameOrEmailInLostPasswordPage("");
         lostPasswordPage.clickResetPasswordBtn();
 
-        Assertions.assertTrue(lostPasswordPage.badUsernameOrEMailAlert());
+        Assertions.assertEquals("Enter a username or email address.", lostPasswordPage.getEmptyFieldErrorAlertText());
     }
 }

@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.stream.Stream;
+
 public class MyAccountPage extends BasePage {
 
     @FindBy(css = "#username")
@@ -13,7 +15,7 @@ public class MyAccountPage extends BasePage {
     @FindBy(css = "[value=\"Log in\"]")
     private WebElement logInButton;
     @FindBy(css = ".woocommerce-error")
-    private WebElement badCredentialsAlert;
+    private WebElement errorMessageAlert;
     @FindBy(css = "a[href$=\"lost-password/\"]")
     private WebElement lostPasswbutton;
 
@@ -24,7 +26,19 @@ public class MyAccountPage extends BasePage {
         lostPasswbutton.click();
     }
     public boolean badCredentialsAlertMessage(){
-        return badCredentialsAlert.isDisplayed();
+        return errorMessageAlert.isDisplayed();
+    }
+    public String unknownUsernameErrorAlert(){
+        return errorMessageAlert.getText();
+    }
+    public String unknownEmailErrorAlert(){
+        return errorMessageAlert.getText();
+    }
+    public String usernameIsRequiredAlert(){
+        return errorMessageAlert.getText();
+    }
+    public String passwordIsRequiredAlert(){
+        return errorMessageAlert.getText();
     }
     public void typeUserNameIntoUsernameField(String userName){
         un.sendKeys(userName);

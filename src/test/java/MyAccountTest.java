@@ -3,25 +3,29 @@ import org.example.MyAccountPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class MyAccountTest extends BaseTest {
     HomePage homePage;
     MyAccountPage myAccountPage;
 
-    @Test
     @DisplayName("Login failure with bad username")
-    void userCanNotLoginInLoginPageWithBadUsername() {
+    @ParameterizedTest
+    @CsvSource({"testas", "tes tas"})
+    void userCanNotLoginInLoginPageWithBadUsername(String userName) {
 
         homePage = new HomePage(driver);
         myAccountPage = new MyAccountPage(driver);
 
         homePage.clickMyAccountBtn();
 
-        myAccountPage.typeUserNameIntoUsernameField("tes tas");
+        myAccountPage.typeUserNameIntoUsernameField(userName);
         myAccountPage.typePasswordIntoPasswrodField("test58 3.!$% as");
         myAccountPage.clickLoginBtn();
 
-        Assertions.assertTrue(myAccountPage.badCredentialsAlertMessage());
+        Assertions.assertEquals("Error: The username " + userName + " is not registered on this site. If you are " +
+                "unsure of your username, try your email address instead.", myAccountPage.unknownUsernameErrorAlert());
     }
 
     @Test
@@ -33,11 +37,12 @@ public class MyAccountTest extends BaseTest {
 
         homePage.clickMyAccountBtn();
 
-        myAccountPage.typeUserNameIntoUsernameField("tes tas@mail.com");
+        myAccountPage.typeUserNameIntoUsernameField("testas@mail.com");
         myAccountPage.typePasswordIntoPasswrodField("test58 3.!$% as");
         myAccountPage.clickLoginBtn();
 
-        Assertions.assertTrue(myAccountPage.badCredentialsAlertMessage());
+        Assertions.assertEquals("Unknown email address. Check again or try your username.",
+                myAccountPage.unknownEmailErrorAlert());
     }
 
     @Test
@@ -53,7 +58,7 @@ public class MyAccountTest extends BaseTest {
         myAccountPage.typePasswordIntoPasswrodField("test58 3.!$% as");
         myAccountPage.clickLoginBtn();
 
-        Assertions.assertTrue(myAccountPage.badCredentialsAlertMessage());
+        Assertions.assertEquals("Error: Username is required.", myAccountPage.usernameIsRequiredAlert());
     }
 
     @Test
@@ -69,6 +74,6 @@ public class MyAccountTest extends BaseTest {
         myAccountPage.typePasswordIntoPasswrodField("");
         myAccountPage.clickLoginBtn();
 
-        Assertions.assertTrue(myAccountPage.badCredentialsAlertMessage());
+        Assertions.assertEquals("Error: The password field is empty.", myAccountPage.passwordIsRequiredAlert());
     }
 }
